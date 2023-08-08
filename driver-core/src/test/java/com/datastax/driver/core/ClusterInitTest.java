@@ -102,11 +102,14 @@ public class ClusterInitTest {
       // multiple connection
       // attempts, because pools create their connections in parallel (so 1 pool failure equals
       // multiple connection failures).
+      scassandra.serverVersion();
       PoolingOptions poolingOptions = new PoolingOptions().setConnectionsPerHost(LOCAL, 1, 1);
 
       cluster =
           Cluster.builder()
               .withPort(scassandra.getBinaryPort())
+              // scassandra supports max V4 protocol
+              .withProtocolVersion(ProtocolVersion.V4)
               .addContactPoints(
                   ipOfNode(1),
                   failingHosts.get(0).address,

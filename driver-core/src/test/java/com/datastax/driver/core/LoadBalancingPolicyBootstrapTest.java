@@ -60,7 +60,7 @@ public class LoadBalancingPolicyBootstrapTest extends CCMTestsSupport {
       assertThat(policy.history)
           .containsOnly(
               entry(INIT, TestUtils.findHost(cluster, 1)),
-              entry(INIT, TestUtils.findHost(cluster, 2)));
+              entry(ADD, TestUtils.findHost(cluster, 2)));
     } finally {
       cluster.close();
     }
